@@ -15,7 +15,7 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/jeroenknoops/github-actions-docker-with@latest'
+  image: 'docker://ghcr.io/jeroenknoops/github-actions-docker-with@main'
   args:
     - '${{ inputs.argument1 }}'
     - '${{ inputs.argument2 }}'
