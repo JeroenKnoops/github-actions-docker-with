@@ -10,6 +10,6 @@ jobs:
 
     steps:
       - name: test action
-        uses: JeroenKnoops/github-actions-docker-with@1f9b6e40b6bd8c4d5c7ed81f1c61d527c55c805e
+        uses: JeroenKnoops/github-actions-docker-with@main
         with:
           argument1: "argument1"
