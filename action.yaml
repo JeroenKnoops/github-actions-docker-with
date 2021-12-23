@@ -1,0 +1,22 @@
+name: 'Test GitHub Action - Docker With'
+description: 'Test GitHub Action with a docker image with arguments'
+branding:
+  icon: lock
+  color: purple
+inputs:
+  argument1:
+    description: 'Argument 1'
+    required: false
+  argument2:
+    description: 'Argument 2'
+    required: false
+  additional_arguments:
+    description: 'Additional arguments'
+    required: false
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/jeroenknoops/github-actions-docker-with@latest'
+  args:
+    - '${{ inputs.argument1 }}'
+    - '${{ inputs.argument2 }}'
+    - '${{ inputs.additional_arguments }}'
