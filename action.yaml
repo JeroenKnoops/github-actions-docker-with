@@ -16,10 +16,17 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: run 
+    - name: run
+      id: run
       shell: bash
       run: |
         args=(${{ inputs.argument1 }})
         args+=(${{ inputs.argument2 }})
         args+=(${{ inputs.additional_arguments }})
-        docker run ghcr.io/jeroenknoops/github-actions-docker-with:main "${args[@]}" 
+        docker run ghcr.io/jeroenknoops/github-actions-docker-with:main "${args[@]}"
+        
+        echo "::set-output name=args::${args[@]}"
+    - name: Run via uses and outputs
+      uses: docker://ghcr.io/jeroenknoops/github-actions-docker-with:main
+      with:
+        args: ${{ steps.run.outputs.args }}
