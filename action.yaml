@@ -28,8 +28,8 @@ runs:
       id: run
       shell: bash
       run: |
-        base_encoded="$(echo '${{ inputs.runner_context }}' | base64)"
-        base_gh_encoded="$(echo '${{ inputs.github_context }}' | base64)"
+        base_encoded="$(echo '${{ inputs.runner_context }}' | base64 -w 0)"
+        base_gh_encoded="$(echo '${{ inputs.github_context }}' | base64 -w 0)"
 
         args=(${{ inputs.argument1 }})
         args+=(${{ inputs.argument2 }})
