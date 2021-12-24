@@ -13,6 +13,10 @@ inputs:
   additional_arguments:
     description: 'Additional arguments'
     required: false
+  runner_context:
+    description: 'internal (do not set): the "runner" context object in json'
+    required: true
+    default: ${{ toJSON(runner) }}
 runs:
   using: 'composite'
   steps:
@@ -20,11 +24,16 @@ runs:
       id: run
       shell: bash
       run: |
+        base_encoded="$(echo '${{ inputs.runner_context }}' | base64)"
+
         args=(${{ inputs.argument1 }})
         args+=(${{ inputs.argument2 }})
         args+=(${{ inputs.additional_arguments }})
+        args+=("${base_encoded}")
+        args+=('${{ inputs.runner_context }}')
+
         docker run ghcr.io/jeroenknoops/github-actions-docker-with:main "${args[@]}"
-        
+
         echo "::set-output name=args::${args[@]}"
     - name: Run via uses and outputs
       uses: docker://ghcr.io/jeroenknoops/github-actions-docker-with:main
