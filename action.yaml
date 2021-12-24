@@ -19,7 +19,7 @@ runs:
     - name: run 
       shell: bash
       run: |
-        args=('${{ inputs.argument1 }}')
-        args+=('${{ inputs.argument2 }}')
-        args+=('${{ inputs.additional_arguments }}')
+        args=(${{ inputs.argument1 }})
+        args+=(${{ inputs.argument2 }})
+        args+=(${{ inputs.additional_arguments }})
         docker run ghcr.io/jeroenknoops/github-actions-docker-with:main "${args[@]}" 
