@@ -14,3 +14,16 @@ jobs:
         with:
           argument1: "argument1"
           additional_arguments: "--argument2 from-additional --additional_argument2 blurk" 
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: test entrypoint with array
+        run: |
+          myArgArray=(argument1 argument2 argument3)
+          ./entrypoint.sh ${myArgArray[*]}
+
+      - name: test docker with array
+        run: |
+          myArgArray=(argument1 argument2 argument3)
+          docker run ghcr.io/jeroenknoops/github-actions-docker-with:main $(echo ${myArgArray[*]}) 
