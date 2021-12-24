@@ -9,12 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: test action
-        uses: JeroenKnoops/github-actions-docker-with@main
-        with:
-          argument1: "argument1"
-          additional_arguments: "--argument2 from-additional --additional_argument2 blurk" 
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -33,3 +27,9 @@ jobs:
           docker run ghcr.io/jeroenknoops/github-actions-docker-with:main ${myArgArray[*]} 
           echo "With echo"
           docker run ghcr.io/jeroenknoops/github-actions-docker-with:main $(echo ${myArgArray[*]}) 
+
+      - name: test action
+        uses: JeroenKnoops/github-actions-docker-with@main
+        with:
+          argument1: "argument1"
+          additional_arguments: "--argument2 from-additional --additional_argument2 blurk" 
