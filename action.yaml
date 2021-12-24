@@ -17,6 +17,10 @@ inputs:
     description: 'internal (do not set): the "runner" context object in json'
     required: true
     default: ${{ toJSON(runner) }}
+  github_context:
+    description: 'internal (do not set): the "github" context object in json'
+    required: true
+    default: ${{ toJSON(github) }}
 runs:
   using: 'composite'
   steps:
@@ -25,12 +29,15 @@ runs:
       shell: bash
       run: |
         base_encoded="$(echo '${{ inputs.runner_context }}' | base64)"
+        base_gh_encoded="$(echo '${{ inputs.github_context }}' | base64)"
 
         args=(${{ inputs.argument1 }})
         args+=(${{ inputs.argument2 }})
         args+=(${{ inputs.additional_arguments }})
         args+=("${base_encoded}")
         args+=('${{ inputs.runner_context }}')
+        args+=("${base_gh_encoded}")
+        args+=('${{ inputs.github_context }}')
 
         docker run ghcr.io/jeroenknoops/github-actions-docker-with:main "${args[@]}"
 
