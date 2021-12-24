@@ -39,4 +39,4 @@ jobs:
         uses: JeroenKnoops/github-actions-docker-with@main
         with:
           argument1: "argument1"
-          additional_arguments: "--argument2 from-additional --additional_argument2 blurk --additional_argument3 'blurk blurk'" 
+          additional_arguments: "--argument2 from-additional --additional_argument2 blurk --additional_argument3 'blurk blurk' --additional_argument4 test" 
