@@ -35,6 +35,20 @@ runs:
         docker run ghcr.io/jeroenknoops/github-actions-docker-with:main "${args[@]}"
 
         echo "::set-output name=args::${args[@]}"
+
+        function test_arg_count {
+          echo "Number of args: $#"
+        }
+
+        test_arg_count "${args[@]}"
+    - name: Test
+      shell: bash
+      run: |
+        function test_arg_count {
+          echo "Number of args: $#"
+        }
+
+        test_arg_count ${{ steps.run.outputs.args }}
     - name: Run via uses and outputs
       uses: docker://ghcr.io/jeroenknoops/github-actions-docker-with:main
       with:
