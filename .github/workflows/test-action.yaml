@@ -22,14 +22,21 @@ jobs:
 
       - name: test docker with array
         run: |
-          myArgArray=(argument1 argument2 argument3)
+          function test_arg_count {
+            echo "Number of args: $#"
+          }
+          myArgArray=(argument1 argument2 'argument3 blurk' 'asdlkfjas sdjsaldkfjsadf')
+          echo "*"
+          test_arg_count ${myArgArray[*]}
+          echo "@"
+          test_arg_count ${myArgArray[@]}    
           echo "Without echo"
-          docker run ghcr.io/jeroenknoops/github-actions-docker-with:main ${myArgArray[*]} 
+          docker run ghcr.io/jeroenknoops/github-actions-docker-with:main ${myArgArray[@]} 
           echo "With echo"
-          docker run ghcr.io/jeroenknoops/github-actions-docker-with:main $(echo ${myArgArray[*]}) 
+          docker run ghcr.io/jeroenknoops/github-actions-docker-with:main $(echo ${myArgArray[@]}) 
 
       - name: test action
         uses: JeroenKnoops/github-actions-docker-with@main
         with:
           argument1: "argument1"
-          additional_arguments: "--argument2 from-additional --additional_argument2 blurk" 
+          additional_arguments: "--argument2 from-additional --additional_argument2 blurk --additional_argument3 'blurk blurk'" 
