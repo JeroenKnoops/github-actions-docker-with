@@ -21,9 +21,15 @@ jobs:
       - name: test entrypoint with array
         run: |
           myArgArray=(argument1 argument2 argument3)
+          echo "Without echo"
           ./entrypoint.sh ${myArgArray[*]}
+          echo "With echo"
+          ./entrypoint.sh $(echo ${myArgArray[*]})
 
       - name: test docker with array
         run: |
           myArgArray=(argument1 argument2 argument3)
+          echo "Without echo"
+          docker run ghcr.io/jeroenknoops/github-actions-docker-with:main ${myArgArray[*]} 
+          echo "With echo"
           docker run ghcr.io/jeroenknoops/github-actions-docker-with:main $(echo ${myArgArray[*]}) 
